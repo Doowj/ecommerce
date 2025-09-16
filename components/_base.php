@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // ============================================================================
 // PHP Setups
@@ -405,7 +407,7 @@ function auth(...$roles) {
     
 
     temp('info', 'Please login first');
-    redirect('/login.php');
+    redirect('login.php');
 
 }
 
@@ -472,45 +474,22 @@ function update_cart($id, $unit) {
 // Database Setups and Functions
 // ============================================================================
 
+/*
+$_db = new PDO(
+    "mysql:host=rds-stack-myrdsinstance-bcxl5tejra2.cng5rlrnyzca.us-east-1.rds.amazonaws.com;dbname=ecommerce;charset=utf8mb4",
+    "admin",
+    "MyRdsPassw0rd#",
+    [
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // 建议加上，方便调试报错
+    ]
+);
+*/
 
-require __DIR__ . '/../vendor/autoload.php';
-
-use Aws\SecretsManager\SecretsManagerClient;
-use Aws\Exception\AwsException;
-
-$client = new SecretsManagerClient([
-    'version' => '2017-10-17',
-    'region'  => 'us-east-1' // ✅ 用 Region，不要加 AZ
+$_db = new PDO('mysql:dbname=wis', 'root', '', [
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
 ]);
 
-$secretName = "EcommerceDBSecret"; // 你在 Secrets Manager 创建的 secret 名
-
-try {
-    $result = $client->getSecretValue([
-        'SecretId' => $secretName,
-    ]);
-
-    if (isset($result['SecretString'])) {
-        $secret = json_decode($result['SecretString'], true);
-
-        $host = $secret['host'];
-        $db   = $secret['dbname'];
-        $user = $secret['username'];
-        $pass = $secret['password'];
-        $charset = "utf8mb4";
-
-        $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
-        $_db = new PDO($dsn, $user, $pass, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-        ]);
-    }
-} catch (AwsException $e) {
-    die("Secrets Manager error: " . $e->getMessage());
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
 
 // Is unique?
 function is_unique($value, $table, $field) {
@@ -534,4 +513,3 @@ function is_exists($value, $table, $field) {
 
 // Range 1-10
 $_units = array_combine(range(1, 10), range(1, 10));
-

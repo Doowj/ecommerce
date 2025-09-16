@@ -26,7 +26,10 @@ $_title="About Us";
 <body>
    
 <!-- header section starts  -->
-<?php include 'components/user_header.php'; ?>
+<?php 
+
+
+include 'components/user_header.php'; ?>
 <!-- header section ends -->
 
 <div class="heading">
@@ -113,7 +116,9 @@ Dynamic, creative and innovative, and with a rapidly growing network of ground-b
 
 
 <!-- footer section starts  -->
-<?php include 'components/footer.php'; ?>
+<?php 
+
+include 'components/footer.php'; ?>
 <!-- footer section ends -->=
 
 

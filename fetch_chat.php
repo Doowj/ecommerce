@@ -1,39 +1,6 @@
 <?php
-/*
-require 'components/_base.php';  // Include the database connection
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-$fromUserId = isset($_GET['fromUserId']) ? intval($_GET['fromUserId']) : 0; // Admin
-$toUserId = isset($_GET['toUserId']) ? intval($_GET['toUserId']) : 0;       // Member
-
-if ($fromUserId > 0 && $toUserId > 0) {
-    try {
-        $query = "SELECT * FROM chat 
-                  WHERE (from_user_id = :fromUserId AND to_user_id = :toUserId)
-                  OR (from_user_id = :toUserId AND to_user_id = :fromUserId)
-                  ORDER BY timestamp ASC";
-        $stmt = $_db->prepare($query);
-        $stmt->bindParam(':fromUserId', $fromUserId);
-        $stmt->bindParam(':toUserId', $toUserId);
-        $stmt->execute();
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $senderId = htmlspecialchars($row['from_user_id']);
-            $message = htmlspecialchars($row['message']);
-            $timestamp = htmlspecialchars($row['timestamp']);
-
-            echo "<p><strong>User {$senderId}:</strong> {$message} <small>{$timestamp}</small></p>";
-        }
-    } catch (PDOException $e) {
-        error_log("Error fetching chat messages: " . $e->getMessage());
-        echo "Error: Could not fetch messages.";
-    }
-}
-
-?>*/
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 require 'components/_base.php'; // Ensure DB connection
 

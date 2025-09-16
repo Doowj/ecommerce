@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Include necessary files
 require_once '../components/_base.php';
 auth('Admin');

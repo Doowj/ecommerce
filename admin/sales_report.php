@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Include base.php for helper functions and database connection
 include '../components/_base.php';
 auth('Admin');

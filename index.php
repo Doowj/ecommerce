@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 include 'components/_base.php';
 include 'components/add_cart.php';
@@ -81,15 +83,19 @@ if (isset($_user->id)) {
 </section>
 
 <?php
-$select_products = $_db->prepare("SELECT p.id, p.name, p.price, p.image, p.category_id, c.name as categoryName, 
-COALESCE(AVG(r.rating), 1) as average_rating 
-FROM product p 
-INNER JOIN category c ON p.category_id = c.id 
-LEFT JOIN review r ON p.id = r.product_id 
-GROUP BY p.id DESC 
-LIMIT 6");
+$select_products = $_db->prepare("
+    SELECT p.id, p.name, p.price, p.image, p.category_id, c.name AS categoryName, 
+           COALESCE(AVG(r.rating), 1) AS average_rating 
+    FROM product p 
+    INNER JOIN category c ON p.category_id = c.id 
+    LEFT JOIN review r ON p.id = r.product_id 
+    GROUP BY p.id 
+    ORDER BY p.id DESC 
+    LIMIT 6
+");
 $select_products->execute();
 $result = $select_products->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <section class="products">
