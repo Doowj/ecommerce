@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2025 at 03:11 AM
+-- Generation Time: Sep 17, 2025 at 06:10 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -17,13 +17,16 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `wis`
+--
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `cart`
 --
 
-DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
@@ -45,7 +48,6 @@ INSERT INTO `cart` (`id`, `member_id`, `product_id`, `quantity`) VALUES
 -- Table structure for table `category`
 --
 
-DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
@@ -70,7 +72,6 @@ INSERT INTO `category` (`id`, `name`) VALUES
 -- Table structure for table `chat`
 --
 
-DROP TABLE IF EXISTS `chat`;
 CREATE TABLE `chat` (
   `id` int(11) NOT NULL,
   `from_user_id` int(11) NOT NULL,
@@ -102,7 +103,6 @@ INSERT INTO `chat` (`id`, `from_user_id`, `to_user_id`, `message`, `timestamp`) 
 -- Table structure for table `favorites`
 --
 
-DROP TABLE IF EXISTS `favorites`;
 CREATE TABLE `favorites` (
   `id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
@@ -125,7 +125,6 @@ INSERT INTO `favorites` (`id`, `member_id`, `product_id`) VALUES
 -- Table structure for table `orderproduct`
 --
 
-DROP TABLE IF EXISTS `orderproduct`;
 CREATE TABLE `orderproduct` (
   `id` int(11) NOT NULL,
   `ordersid` int(11) NOT NULL,
@@ -176,7 +175,6 @@ INSERT INTO `orderproduct` (`id`, `ordersid`, `product_id`, `quantity`, `subtota
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
@@ -221,7 +219,6 @@ INSERT INTO `orders` (`id`, `member_id`, `date`, `time`, `total_product`, `total
 -- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
   `id` int(11) NOT NULL,
   `orders_id` int(11) NOT NULL,
@@ -266,7 +263,6 @@ INSERT INTO `payment` (`id`, `orders_id`, `amount`, `payment_method`, `bankAccou
 -- Table structure for table `product`
 --
 
-DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -290,8 +286,7 @@ INSERT INTO `product` (`id`, `name`, `author`, `price`, `description`, `image`, 
 (10, 'Tingkatan 5 - English Book SPM', 'Penerbitan Pelangi', 6, 'This is a nice english book', 'english_exercise_book_form_5_1679298311_1790240b.jpg', 198, 3),
 (11, 'Tingkatan 5 - English Book SPM', 'Penerbitan Pelangi', 6, '', 'product_image.jpg', 200, 3),
 (12, 'SPM MASTERCLASS BAHASA MELAYU (EDISI 2024)', 'SASBADI', 6, 'GOOD SPM BOOK', '9789837738539.jpg', 198, 3),
-(15, 'Love Your Life', 'Kinsella, Sophie', 49.9, 'I love you . . . but what if I can\'t love your life?\r\n\r\nAva is sick of online dating. She\'s always trusted her own instincts over an algorithm, anyway, and she wants a break from it all. So when she signs up to a semi-silent, anonymous writing retreat in', '9781784165949_FC_mph (1).jpeg', 98, 7),
-(16, 'You\'ve Reached Sam', 'Thao, Dustin', 58.9, 'How do you move forward when everything you love in on the line?\r\n\r\nSeventeen-year-old Julie has her future all planned out: move out of her small town with her boyfriend Sam, attend college in the city, spend a summer in Japan. But then Sam dies. And eve', '9781035006205_MPH_You_veReachedSam_UK.jpeg', 147, 7);
+(15, 'Love Your Life', 'Kinsella, Sophie', 49.9, 'I love you . . . but what if I can\'t love your life?\r\n\r\nAva is sick of online dating. She\'s always trusted her own instincts over an algorithm, anyway, and she wants a break from it all. So when she signs up to a semi-silent, anonymous writing retreat in', '9781784165949_FC_mph (1).jpeg', 98, 7);
 
 -- --------------------------------------------------------
 
@@ -299,7 +294,6 @@ INSERT INTO `product` (`id`, `name`, `author`, `price`, `description`, `image`, 
 -- Table structure for table `review`
 --
 
-DROP TABLE IF EXISTS `review`;
 CREATE TABLE `review` (
   `id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
@@ -328,7 +322,6 @@ INSERT INTO `review` (`id`, `member_id`, `product_id`, `title`, `description`, `
 -- Table structure for table `token`
 --
 
-DROP TABLE IF EXISTS `token`;
 CREATE TABLE `token` (
   `id` varchar(100) NOT NULL,
   `expire` datetime NOT NULL,
@@ -341,7 +334,6 @@ CREATE TABLE `token` (
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `image` varchar(100) NOT NULL,
