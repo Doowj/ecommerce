@@ -36,10 +36,9 @@ if (is_post()) {
         // Check for user existence
         if ($u) {
             $current_time = new DateTime();
-            $block_until = new DateTime($u->block_until);
-
+            $block_until = $u->block_until ? new DateTime($u->block_until) : null;
             // Check if the account is blocked
-            if ($u->login_attempts >= 3 && $current_time < $block_until) {
+            if ($u->login_attempts >= 3 && $block_until && $current_time < $block_until) {
                 $wait_time = $block_until->diff($current_time);
                 temp("error", "Your account is temporarily blocked. Please try again in " . $wait_time->i . " minutes.");
             } else {
