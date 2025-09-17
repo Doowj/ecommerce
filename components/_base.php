@@ -474,21 +474,20 @@ function update_cart($id, $unit) {
 // Database Setups and Functions
 // ============================================================================
 
-/*
-$_db = new PDO(
-    "mysql:host=rds-stack-myrdsinstance-bcxl5tejra2.cng5rlrnyzca.us-east-1.rds.amazonaws.com;dbname=ecommerce;charset=utf8mb4",
-    "admin",
-    "MyRdsPassw0rd#",
-    [
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // 建议加上，方便调试报错
-    ]
-);
-*/
+try {
+    $_db = new PDO(
+        "mysql:host=rds-stack-myrdsinstance-iaphxerfkway.cng5rlrnyzca.us-east-1.rds.amazonaws.com;dbname=ecommerce;charset=utf8mb4",
+        "admin",
+        "admin123*",
+        [
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ]
+    );
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
 
-$_db = new PDO('mysql:dbname=wis', 'root', '', [
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-]);
 
 
 // Is unique?
