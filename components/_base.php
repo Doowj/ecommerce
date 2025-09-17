@@ -41,16 +41,18 @@ function post($key, $value = null) {
 //    return is_array($value) ? array_map('trim', $value) : trim($value);
 //}
 
-function req($key, $value = null) {
-    $value = $_REQUEST[$key] ?? $value;
-    // Ensure $value is not null before applying trim()
+function req($key, $default = '') {
+    $value = $_REQUEST[$key] ?? $default;
+
     if (is_array($value)) {
         return array_map(function($item) {
-            return is_string($item) ? trim($item) : $item;
+            return is_string($item) ? trim($item) : (string)$item;
         }, $value);
     }
-    return is_string($value) ? trim($value) : $value;
+
+    return trim((string)$value); // 强制转成 string，再 trim()
 }
+
 
 
 // Redirect to URL
